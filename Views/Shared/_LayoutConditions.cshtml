@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Room Conditions</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/sb-admin-2.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Room Conditions</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" style="padding-left:20px; margin-left:30px; border-left:solid; border-left-color:white; border-left-width:thin;">
+
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item" style="padding-left:30px;">
+                    @Html.ActionLink("Temperature", "TemperatureCelsius", "Conditions", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item" style="padding-left:30px;">
+                    @Html.ActionLink("Humidity", "Humidity", "Conditions", null, new { @class = "nav-link" })
+                </li>
+
+
+
+                <li class="nav-item active" style="border-left:solid; border-left-color:white; border-left-width:thin; margin-left:20px; padding-left:20px;">
+                    <a class="nav-link active" target="_blank" href="https://www.linkedin.com/in/michaloracki">LinkedIn</a>
+                </li>
+
+                <li class="nav-item active" style="padding-left:20px;">
+                    <a class="nav-link active" target="_blank" href="https://github.com/oracky">GitHub</a>
+                </li>
+
+            </ul>
+
+
+        </div>
+
+    </nav>
+
+    @RenderBody()
+
+    <hr />
+    <footer>
+        <p style="text-align:center;">&copy; @DateTime.Now.Year - Michał Oracki&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;michaloracki@wp.pl</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <div class="content">
+        <div class="topbar">
+            <h1 style="text-align:center;">Humidity and Temperature</h1>
+            <h4 style="text-align:center;">Check current conditions in your room</h4>
+        </div><br /><br />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <a href=@Url.Action("Humidity","Conditions") style="text-decoration:none;">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary" style="text-align:center;">Humidity</h6>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <img style="width:100%; height:100%; margin-bottom:20px;" src="~/Images/humidity-flow.jpg" alt="">
+                                </div>
+                                <div style="padding-left:20px; padding-right:20px; text-align:justify; margin-bottom:20px;">
+                                    <p>See how humidity in your room has changed since your last visit! Don't forget to check it regularly :)</p>
+                                    @Html.ActionLink(" Current humidity in RH% and more...", "Humidity", "Conditions")&rarr;
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <a href=@Url.Action("TemperatureCelsius","Conditions") style="text-decoration:none;">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary" style="text-align:center;">Temperature</h6>
+                            </div>
+                            <div>
+                                <div class="text-center">
+                                    <img style="width:100%; height:100%; margin-bottom:20px;" src="~/Images/temperature-flow.jfif" alt="">
+                                </div>
+                                <div style="padding-left:20px; padding-right:20px; text-align:justify; margin-bottom:20px;">
+                                    <p>See temperature changes in both Celsius and Farenheit. See if something has changed!</p>
+                                    @Html.ActionLink("Current temperature and heat index...", "TemperatureCelsius", "Conditions")&rarr;
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            </div>
+        </div>
+    </div>
