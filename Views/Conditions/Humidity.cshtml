@@ -106,12 +106,13 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Temperature lately</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Humidity lately</h6>
             </div>
+
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-area">
-                    <canvas id="myAreaChart" style="width:80%; height:80%;"></canvas>
+                    <canvas id="myAreaChart" style="width:100%; height:100%;"></canvas>
                 </div>
             </div>
 
@@ -120,7 +121,22 @@
     </div>
 
     <script>
-                    var chartData = @Html.Raw(Json.Encode(Model.valueList));
+                    var tempChartData = @Html.Raw(Json.Encode(Model.valueList));
+                    var chartData = [];
+
+                    for (var i = 24; i >=0; i--)
+                    {
+                        chartData.push(tempChartData[tempChartData.length - 1 - i]);
+                    }
+
+                    var counter = 1;
+                    var tab = [];
+                    
+                    for (var i in chartData)
+                    {
+                        tab.push(counter);
+                        counter++;
+                    }
 
                     var lineChart = new Chart(document.getElementById("myAreaChart"), {
 
@@ -129,6 +145,7 @@
 
                         data: {
 
+                            labels: tab,
                             datasets: [{
                                 label: 'Humidity',
                                 data: chartData,
@@ -138,13 +155,23 @@
                         },
 
                         options: {
-                                title: {
+                               
                                 display: true,
                                 responsive: false,
+                                scales: {
+                                    xAxes: [{
+                                        scaleLabel: {
+                                         
+                                            display: true,
+                                            labelString: "Last measurements",
+                                        }
+                                        
+                                    }]
+                                }
                                 }
                         }
 
-                    });
+                    );
 
     </script>
 </div>
