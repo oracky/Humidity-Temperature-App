@@ -1,0 +1,178 @@
+﻿@using HumidityAndTempApp.Models
+@model HumidityAndTempApp.Models.Conditions
+
+@{
+    ViewBag.Title = "TemperatureCelsius";
+    Layout = "~/Views/Shared/_LayoutConditions.cshtml";
+}
+
+
+
+    <div class="container-fluid">
+
+        <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top:40px; padding-bottom:20px;">
+            <h1 class="h3 mb-0 text-gray-800">Temperature [&deg;C]</h1><h1 class="h3 mb-0 text-gray-800"> Current temperature:&nbsp;@Model.lastValue&deg;C</h1>
+
+            <div style="padding-right:80px;">
+                @Html.ActionLink("Change to Fahrenheit", "TemperatureFahrenheit", "Conditions", null, new { @class = "d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" })
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </div>
+
+        </div>
+
+        <!-- Content Row -->
+        <div class="row" style="padding-top:20px;">
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Max Temperature</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.maxV</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Min Temperature</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.minV</div>
+                            </div>
+
+
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-succes text-uppercase mb-1">Average Temperature</div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@Model.avgV</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Last measurement</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.lastTime</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Temperature lately</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart" style="width:100%; height:100%;"></canvas>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <script>
+                    var tempChartData = @Html.Raw(Json.Encode(Model.valueList));
+
+                    var chartData = [];
+
+                    for (var i = 49; i >= 0; i--)
+                    {
+                        chartData.push(tempChartData[tempChartData.length - 1 - i]);
+                    }
+            
+                    var counter = 1;
+                    var tab = [];
+                    
+                    for (var i in chartData)
+                    {
+                        tab.push(counter);
+                        counter++;
+                    }
+                    
+                    var lineChart = new Chart(document.getElementById("myAreaChart"), {
+
+
+                        type: 'line',
+
+                        data: {
+
+                            labels: tab,
+                            datasets: [{
+                                label: 'Temperature',
+                                data: chartData,
+                                borderColor: "#3e95cd",
+                                fill: false
+                            }]
+                        },
+
+                        options: {
+                                
+                                display: true,
+                                responsive: false,
+                                 scales: {
+                                    xAxes: [{
+                                        scaleLabel: {
+                                         
+                                            display: true,
+                                            labelString: "Last measurements",
+                                        }
+                                        
+                                    }]
+                                }
+                        }
+
+                    });
+
+        </script>
+    </div>
