@@ -5,6 +5,12 @@
 
 ![pic1](https://user-images.githubusercontent.com/52107081/61399484-90591f80-a8ce-11e9-891a-0d44dd225b83.PNG)
 
-##### Temperature in Celsius page:
+##### Temperature in Celsius top of the page:
 
-![pic2](https://user-images.githubusercontent.com/52107081/61399784-23925500-a8cf-11e9-85e1-54790c983ea8.PNG)
+![1-1](https://user-images.githubusercontent.com/52107081/62414240-d5908780-b618-11e9-9dc9-fdbf53b176f2.PNG)
+
+##### Humidity top of the page
+
+![1-2](https://user-images.githubusercontent.com/52107081/62414255-1a1c2300-b619-11e9-949f-58455d433a21.PNG)
+
+
